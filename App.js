@@ -1,53 +1,28 @@
-import 'react-native-gesture-handler';
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from './Views/HomeScreen'; // Certifique-se de ajustar os caminhos conforme necessário
+import SettingsScreen from './Views/SettingsScreen';
+import Contato from './Views/Contato';
+import Blog from './Views/Blog';
 
-function HomeScreen(props) {
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button 
-      title='em breve'
-      onPress={() => props.navigation.navigate("About")}
-      />
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name="Sobre nós" component={HomeScreen} />
+      <Tab.Screen name="Equipe" component={SettingsScreen} />
+      <Tab.Screen name="Contato" component={Contato} />
+      <Tab.Screen name="Blog" component={Blog} />
+    </Tab.Navigator>
   );
 }
 
-function AboutScreen(props) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>About</Text>
-      <Button 
-      title='SAC'
-      onPress={() => props.navigation.navigate("SAC")}
-      />
-    </View>
-  );
-}
-
-function SacScreen(props) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>SAC</Text>
-    </View>
-  );
-}
-
-const Drawer = createDrawerNavigator();
-
-function App() {
+export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Sobre nós" component={AboutScreen} />
-        <Drawer.Screen name="SAC" component={SacScreen} />
-      </Drawer.Navigator>
+      <MyTabs />
     </NavigationContainer>
   );
 }
-
-export default App;
